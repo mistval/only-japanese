@@ -1,0 +1,18 @@
+#japaneseOnlyExt_overlay {
+  background-color: whitesmoke;
+  opacity: .95;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 2147483647;
+}
+
+#japaneseOnlyExt_blockedMessageContainer {
+  position: fixed;
+  left: 40%;
+  right: 40%;
+  top: 40%;
+  bottom: 40%;
+}

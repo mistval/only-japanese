@@ -1,0 +1,28 @@
+{
+  "name": "Japanese Only",
+  "version": "0.1",
+  "description": "Warn you before allowing you to view a webpage that is not written in Japanese. For AJATTers and others trying to immerse themselves.",
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*","https://*/*"],
+      "css": ["content_script.css"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2
+}
