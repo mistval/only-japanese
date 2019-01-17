@@ -41,10 +41,6 @@ function isNumber(char) {
   return char >= '0' && char <= '9';
 }
 
-const chars = document.body.innerText.split('').filter(char => char.trim());
-const japaneseCharCount = chars.reduce((sum, char) => isJapanese(char) || isNumber(char) ? sum + 1 : sum, 0);
-const japanesePercentage = (japaneseCharCount / chars.length) * 100;
-
 function registerOverlayEvents(overlay) {
   const closeOverlayButton = document.getElementById(closeOverlayButtonId);
   closeOverlayButton.addEventListener('click', () => {
@@ -58,11 +54,18 @@ function registerOverlayEvents(overlay) {
 
   const whitelistButton = document.getElementById(whitelistButtonId);
   whitelistButton.addEventListener('click', () => {
-
   });
 }
 
-chrome.storage.sync.get('minJapanesePercentage', ({ minJapanesePercentage }) => {
+chrome.storage.sync.get(['enabled', 'minJapanesePercentage'], ({ enabled, minJapanesePercentage }) => {
+  if (!enabled) {
+    return;
+  }
+
+  const chars = document.body.innerText.split('').filter(char => char.trim());
+  const japaneseCharCount = chars.reduce((sum, char) => isJapanese(char) || isNumber(char) ? sum + 1 : sum, 0);
+  const japanesePercentage = (japaneseCharCount / chars.length) * 100;
+
   if (japanesePercentage >= minJapanesePercentage) {
     return;
   }
@@ -71,4 +74,3 @@ chrome.storage.sync.get('minJapanesePercentage', ({ minJapanesePercentage }) => 
   document.body.appendChild(overlay);
   registerOverlayEvents(overlay);
 });
-
